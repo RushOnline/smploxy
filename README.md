@@ -6,7 +6,9 @@ Mainly this proxy intended to work with https://github.com/RushOnline/chrome-sen
 
 ## Example
 
-Usage example (find all links contains 'mp3' and add 'play' button):
+Usage example (find all links contains 'mp3' and add 'play' button).
+This call returns plain object with boolean property 'success' and additionally
+string property 'message' on failure.
 
 ```javascript
   $('a[href*=mp3]').each(function() {
@@ -35,5 +37,4 @@ Usage example (find all links contains 'mp3' and add 'play' button):
 ```
 ## TODO
 
-- Use SMPlayer connection success/failure in response to browser
 - Autodetect SMPlayer remote management port from config (temp/autoport in ~/.config/smplayer/smplayer.ini)
