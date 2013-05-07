@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
+import os
 import json
 from urlparse import parse_qs
+from ConfigParser import RawConfigParser
 
 from twisted.web import server, resource
 from twisted.web.server import NOT_DONE_YET
@@ -68,8 +70,14 @@ class Simple(resource.Resource):
         command = content.get('playlist.add', [None])[0]
         item = content['item'][0]
 
+
+        config_parser = RawConfigParser()
+        config_parser.read(os.path.expanduser("~/.config/smplayer/smplayer.ini"))
+        port = config_parser.getint('instances', 'temp\\autoport')
+
+
         creator = ClientCreator(reactor, SMPlayer, item = item)
-        creator.connectTCP('127.0.0.1', 8000).addBoth(_renderResponse)
+        creator.connectTCP('127.0.0.1', port).addBoth(_renderResponse)
 
         request.setHeader('Access-Control-Allow-Origin', '*')
         request.setHeader('Content-Type', 'application/json')

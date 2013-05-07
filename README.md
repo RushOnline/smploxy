@@ -34,7 +34,3 @@ string property 'message' on failure.
       return $.ajax(request);
     }));
   });
-```
-## TODO
-
-- Autodetect SMPlayer remote management port from config (temp/autoport in ~/.config/smplayer/smplayer.ini)
